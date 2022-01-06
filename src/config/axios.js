@@ -8,7 +8,7 @@ const instance = axios.create({
   //   password: '123',
   // },
   headers: {
-    'X-Requested-With': 'XMLHttpRequest',
+    // 'X-Requested-With': 'XMLHttpRequest',
   },
 });
 
