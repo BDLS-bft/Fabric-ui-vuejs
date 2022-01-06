@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-import Asset from './components/AssetBlock';
-import Toolbar from './components/ToolBar';
+import HelloWorld from './components/HelloWorld.vue';
+import Asset from './components/AssetBlock.vue';
+import Toolbar from './components/ToolBar.vue';
 
 export default {
   name: 'App',
