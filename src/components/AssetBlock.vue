@@ -84,6 +84,7 @@
         </v-dialog>
       </v-toolbar>
     </template>
+    <!-- eslint-disable-next-line vue/valid-v-slot -->
     <template v-slot:item.actions="{ item }">
       <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
       <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
@@ -95,7 +96,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../config/axios';
 
 export default {
   data: () => ({
@@ -146,9 +147,11 @@ export default {
 
   watch: {
     dialog(val) {
+      // eslint-disable-next-line no-unused-expressions
       val || this.close();
     },
     dialogDelete(val) {
+      // eslint-disable-next-line no-unused-expressions
       val || this.closeDelete();
     },
   },
@@ -160,7 +163,7 @@ export default {
 
   methods: {
     async getData() {
-      const response = await axios.get('api/hi');
+      const response = await axios.get('hi');
       this.items = response.data;
     },
     initialize() {
