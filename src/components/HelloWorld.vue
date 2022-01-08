@@ -11,9 +11,7 @@
       </v-col>
 
       <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Hyperledger Fabric WebApp
-        </h1>
+        <h1 class="display-2 font-weight-bold mb-3">Blockchain Data</h1>
 
         <!-- <p class="subheading font-weight-regular">
           For help and collaboration with other Vuetify developers,
