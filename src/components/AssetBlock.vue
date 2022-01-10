@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="items"
-    sort-by="calories"
+    sort-by="ID"
     class="elevation-1"
   >
     <template v-slot:top>
@@ -90,10 +90,11 @@
         </v-dialog>
       </v-toolbar>
     </template>
-    <!-- <template v-slot:item.actions="{ item }">
+    <template v-slot:[`item.actions`]="{ item }">
+      <!-- <template v-slot:item.actions="{ item }"> -->
       <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
-      <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
-    </template> -->
+      <!-- <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon> -->
+    </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize"> Reset </v-btn>
     </template>

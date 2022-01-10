@@ -1,38 +1,11 @@
 <template>
   <div id="blockInfos">
       <v-container>
-    <v-layout>
-      <v-flex xs12 sm6>
-        <v-card hover>
-
-          <v-card-media
-            src="https://raw.githubusercontent.com/ijklim/simon-game/gh-pages/assets/img/bg--game-pad.jpg"
-            height="150px"
-          >
-          </v-card-media>
-
-          <v-card-title>
-            <h2>v-card-title</h2>
-          </v-card-title>
-
-          <v-card-text>
-                        <div
-                class="productsItemContainer"
-                v-for="blockInfo in blockInfos"
-                :key="blockInfo.hieght"
-                >
-                <div class="productsItem">
-                    <!-- The rest of the elements -->
-                </div>
-                </div>
-            </div>
-            line 1<br>
-            line 2<br>
-            line 3
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
+   <div channelId,
+      hieght,
+      previousHashID,
+      currentBlockHash,
+      transactionCount></div>
   </v-container>
 
 </template>
@@ -45,13 +18,31 @@ export default {
 
   data() {
     return {
-      blockInfos: [],
+      channelId: '',
+      hieght: '',
+      previousHashID: '',
+      currentBlockHash: '',
+      transactionCount: '',
     };
   },
 
-  mounted() {
+  async mounted() {
     axios.get('bolckinfo').then((response) => {
-      this.blockInfos = response.data.blockInfos;
+      const {
+        channelId,
+        hieght,
+        previousHashID,
+        currentBlockHash,
+        transactionCount,
+      } = response.data.blockInfos;
+
+      this.channelId = channelId;
+      this.hieght = hieght;
+      this.previousHashID = previousHashID;
+      this.currentBlockHash = currentBlockHash;
+      this.transactionCount = transactionCount;
+
+      //   console.log(this);
     });
   },
 };
