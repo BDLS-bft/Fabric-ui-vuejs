@@ -78,26 +78,26 @@
             >
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete"
+              <!-- <v-btn color="blue darken-1" text @click="closeDelete"
                 >Cancel</v-btn
               >
               <v-btn color="blue darken-1" text @click="deleteItemConfirm"
                 >OK</v-btn
-              >
+              > -->
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
         </v-dialog>
       </v-toolbar>
     </template>
-    <template v-slot:[`item.actions`]="{ item }">
-      <!-- <template v-slot:item.actions="{ item }"> -->
+    <!-- <template v-slot:[`item.actions`]="{ item }">
+      <template v-slot:item.actions="{ item }">
       <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
-      <!-- <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon> -->
+      <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize"> Reset </v-btn>
-    </template>
+    </template> -->
   </v-data-table>
 </template>
 
@@ -219,11 +219,17 @@ export default {
       });
     },
 
-    save() {
+    async save() {
+      console.log('SAVING');
+      console.log(this.editedItem.Size);
       if (this.editedIndex > -1) {
         Object.assign(this.desserts[this.editedIndex], this.editedItem);
       } else {
-        this.desserts.push(this.editedItem);
+        console.log(this.editedItem.Owner);
+        const response = await axios.post('assets', this.editedItem);
+        console.log(response);
+        this.items.push(this.editedItem);
+        // this.desserts.push(this.editedItem);
       }
       this.close();
     },

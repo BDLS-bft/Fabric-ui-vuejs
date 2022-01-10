@@ -3,10 +3,10 @@ import axios from 'axios';
 const instance = axios.create({
   baseURL: `${process.env.VUE_APP_API_HOST}/api/`,
   // until backend changes - this is needed
-  // auth: {
-  //   username: 'admin',
-  //   password: '123',
-  // },
+  auth: {
+    username: 'admin',
+    password: '123',
+  },
   headers: {
     // 'X-Requested-With': 'XMLHttpRequest',
   },

@@ -11,14 +11,16 @@
               height="50"
             />
           </v-list-item-title>
-
-          <v-list-item-subtitle> Blochchaine Info </v-list-item-subtitle>
+          <!-- <v-list-item-subtitle> Blockchaine info </v-list-item-subtitle> -->
+          <v-list-item-subtitle>
+            <block-info class="mt-10" />
+          </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
       <!-- <v-divider></v-divider> -->
 
-      <v-list dense nav>
+      <!-- <v-list dense nav>
         <v-list-item v-for="item in items" :key="item.title" link>
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -28,7 +30,10 @@
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-      </v-list>
+      </v-list> -->
+      <!-- <template #append>
+        <block-info />
+      </template> -->
     </v-navigation-drawer>
 
     <v-app-bar app>
@@ -54,14 +59,16 @@
 
 <script>
 import Asset from './AssetBlock.vue';
+import BlockInfo from './Blockinfo.vue';
 
 export default {
   name: 'LandingPage',
   components: {
+    BlockInfo,
     Asset,
   },
   data: () => ({
-    drawer: null,
+    drawer: true,
     ecosystem: [],
     importantLinks: [],
     whatsNext: [],
