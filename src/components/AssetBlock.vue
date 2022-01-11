@@ -90,19 +90,20 @@
         </v-dialog>
       </v-toolbar>
     </template>
-    <!-- <template v-slot:[`item.actions`]="{ item }">
-      <template v-slot:item.actions="{ item }">
+    <!-- eslint-disable-next-line vue/valid-v-slot -->
+    <template v-slot:item.actions="{ item }">
       <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
       <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize"> Reset </v-btn>
-    </template> -->
+    </template>
   </v-data-table>
 </template>
 
 <script>
 import axios from '../config/axios';
+import getBlockinfo from './getBlockinfo';
 
 export default {
   data: () => ({
@@ -121,6 +122,7 @@ export default {
       { text: 'Owner', value: 'Owner' },
       { text: 'Size', value: 'Size' },
       { text: 'docType', value: 'docType', sortable: false },
+      { text: 'Actions', value: 'actions', sortable: false },
     ],
     desserts: [],
     editedIndex: -1,
@@ -193,13 +195,14 @@ export default {
     },
 
     deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.items.indexOf(item);
       this.editedItem = { ...item };
       this.dialogDelete = true;
+      getBlockinfo();
     },
 
     deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1);
+      this.items.splice(this.editedIndex, 1);
       this.closeDelete();
     },
 
@@ -221,14 +224,13 @@ export default {
 
     async save() {
       console.log('SAVING');
-      console.log(this.editedItem.Size);
       if (this.editedIndex > -1) {
         Object.assign(this.desserts[this.editedIndex], this.editedItem);
       } else {
-        console.log(this.editedItem.Owner);
-        const response = await axios.post('assets', this.editedItem);
-        console.log(response);
+        await axios.post('assets', this.editedItem);
         this.items.push(this.editedItem);
+        // getBlockinfo();
+        // this.items.push(this.editedItem);
         // this.desserts.push(this.editedItem);
       }
       this.close();

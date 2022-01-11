@@ -11,28 +11,33 @@
     <div class="blockchain-data">{{ currentBlockHash }}</div>
     <div class="blockchain-label">TransactionCount:</div>
     <div class="blockchain-data">{{ transactionCount }}</div>
+    <br />
+    <v-btn color="blue" dark @click="refreshBlockinfo">Refresh</v-btn>
   </div>
 </template>
 
 <script>
-import axios from '../config/axios';
+// import axios from '../config/axios';
+import getBlockinfo from './getBlockinfo';
+import state from '../config/blockState';
 
 export default {
   name: 'blockInfos',
 
-  data() {
-    return {
-      channelId: '',
-      hieght: '',
-      previousHashID: '',
-      currentBlockHash: '',
-      transactionCount: '',
-    };
-  },
+  //   data() {
+  //     return {
+  //       channelId: '',
+  //       hieght: '',
+  //       previousHashID: '',
+  //       currentBlockHash: '',
+  //       transactionCount: '',
+  //     };
+  //   },
 
-  async mounted() {
-    const response = await axios.get('bolckinfo');
-    Object.assign(this, response.data);
+  mounted() {
+    // const response = await axios.get('bolckinfo'); 1st approch
+    getBlockinfo();
+    // Object.assign(this, response.data); 1st approch
 
     // ({
     //   channelId: this.channelId,
@@ -49,6 +54,28 @@ export default {
     //   this.transactionCount = transactionCount;
 
     //   console.log(this);
+  },
+  computed: {
+    channelId() {
+      return state.channelId;
+    },
+    hieght() {
+      return state.hieght;
+    },
+    previousHashID() {
+      return state.previousHashID;
+    },
+    currentBlockHash() {
+      return state.currentBlockHash;
+    },
+    transactionCount() {
+      return state.transactionCount;
+    },
+  },
+  methods: {
+    refreshBlockinfo() {
+      getBlockinfo();
+    },
   },
 };
 </script>
